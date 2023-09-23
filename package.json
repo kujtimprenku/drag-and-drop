@@ -1,7 +1,8 @@
 {
-  "name": "understanding-typescript",
+  "name": "drag-and-drop",
+  "packageManager": "yarn@3.6.3",
   "version": "1.0.0",
-  "description": "Understanding TypeScript Course Setup",
+  "description": "Drag & Drop TS Project",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
