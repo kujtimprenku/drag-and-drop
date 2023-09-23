@@ -27,15 +27,12 @@ function validate(validatableInput: Validatable) {
         isValid = isValid && validatableInput.value <= validatableInput.max;
     }
 
-    console.log({isValid})
-
     return isValid;
 }
 
 
 
 // Autobind Decorator
-
 function Autobind(_: any, _2: string, descriptor: PropertyDescriptor): PropertyDescriptor {
     const originalMethod = descriptor.value;
     const adjustedDescriptor: PropertyDescriptor = {
@@ -49,6 +46,34 @@ function Autobind(_: any, _2: string, descriptor: PropertyDescriptor): PropertyD
     return adjustedDescriptor;
 }
 
+// ProjectList class
+class ProjectList {
+    templateElement: HTMLTemplateElement;
+    hostElement: HTMLDialogElement;
+    element: HTMLElement;
+    constructor(private type: "active" | "finished") {
+        this.templateElement = document.getElementById("project-list")! as HTMLTemplateElement;
+        this.hostElement = document.getElementById("app")! as HTMLDialogElement;
+
+        const importedNode = document.importNode(this.templateElement.content, true);
+        this.element = importedNode.firstElementChild as HTMLElement;
+        this.element.id = `${this.type}-projects`;
+
+        this.attach();
+        this.renderContent();
+    }
+
+    private renderContent() {
+        const listId = `${this.type}-projects-list`;
+        this.element.querySelector("ul")!.id = listId;
+        this.element.querySelector("h2")!.textContent = this.type.toUpperCase() + " PROJECTS";
+    }
+    private attach() {
+        this.hostElement.insertAdjacentElement("beforeend", this.element);
+    }
+}
+
+// ProjectInput class
 class ProjectInput {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDialogElement;
@@ -63,7 +88,7 @@ class ProjectInput {
 
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild as HTMLFormElement;
-        this.element.id = "user-input"
+        this.element.id = "user-input";
 
         this.titleInputElement = this.element.querySelector("#title")!;
         this.descriptionInputElement = this.element.querySelector("#description")!;
@@ -135,3 +160,5 @@ class ProjectInput {
 }
 
 const projectInput = new ProjectInput();
+const activeProjectList = new ProjectList("active");
+const finishedProjectList = new ProjectList("finished")
