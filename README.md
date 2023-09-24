@@ -21,3 +21,8 @@ yarn build
 ```bash
 yarn preview
 ```
+
+### Lint TS files
+```bash
+yarn lint
+```
