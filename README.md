@@ -6,18 +6,18 @@
 ```bash
 yarn install
 ```
-### Start App
+### Start App in Dev Mode
 
 ```bash
-yarn start
+yarn dev
 ```
 
-### Compile TS files in watch mode
+### Build for Production
 ```bash
-tsc -w
+yarn build
 ```
 
-### Lint TS files
+### Preview Production Mode
 ```bash
-yarn lint
+yarn preview
 ```
