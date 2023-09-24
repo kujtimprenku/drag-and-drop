@@ -1,8 +1,10 @@
 // Project State Management class
 
+type Listener = (items: Array<Project>) => void;
+
 class ProjectState {
-    private listeners: Array<any> = [];
-    private projects: Array<any> = [];
+    private listeners: Array<Listener> = [];
+    private projects: Array<Project> = [];
     private static instance: ProjectState;
 
     private constructor() {
@@ -18,17 +20,12 @@ class ProjectState {
         return this.instance;
     }
 
-    addListener(listenerFn: Function){
+    addListener(listenerFn: Listener){
         this.listeners.push(listenerFn);
     }
 
     addProject(title: string, description: string, numOfPeople: number) {
-        const newProject = {
-            id: Math.random().toString(),
-            title,
-            description,
-            people: numOfPeople
-        }
+        const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.ACTIVE);
 
         this.projects.push(newProject);
 
@@ -88,12 +85,24 @@ function Autobind(_: any, _2: string, descriptor: PropertyDescriptor): PropertyD
     return adjustedDescriptor;
 }
 
+// Project status type
+enum ProjectStatus  {
+    ACTIVE,
+    FINISHED
+}
+
+// Project class
+class Project {
+    constructor(public id: string, public title: string, public description: string, public people: number, public status: ProjectStatus) {
+    }
+}
+
 // ProjectList class
 class ProjectList {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDialogElement;
     element: HTMLElement;
-    assignedProjects: Array<any>;
+    assignedProjects: Array<Project>;
     constructor(private type: "active" | "finished") {
         this.templateElement = document.getElementById("project-list")! as HTMLTemplateElement;
         this.hostElement = document.getElementById("app")! as HTMLDialogElement;
@@ -103,7 +112,7 @@ class ProjectList {
         this.element = importedNode.firstElementChild as HTMLElement;
         this.element.id = `${this.type}-projects`;
 
-        projectState.addListener((projects: Array<any>) => {
+        projectState.addListener((projects: Array<Project>) => {
             this.assignedProjects = projects;
             this.renderProjects();
         });
