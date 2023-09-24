@@ -3,11 +3,19 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  width: 600px;
+  max-width: 600px;
 }
 
 label,
@@ -21,28 +29,35 @@ label {
   font-weight: bold;
 }
 
+input {
+  height: 40px;
+}
+
 input,
 textarea {
   font: inherit;
+  border-radius: 6px;
   padding: 0.2rem 0.4rem;
   width: 100%;
   max-width: 30rem;
-  border: 1px solid #ccc;
+  border: 1px solid #eaeaea;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  background: #fff5f9;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.20), 0px 0px 4px 1px rgba(0,0,0,.16);
 }
 
 button {
   font: inherit;
-  background: #ff0062;
-  border: 1px solid #ff0062;
+  background: #171717;
+  border: 1px solid #171717;
   cursor: pointer;
   color: white;
   padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  border-radius: 6px;
 }
 
 button:focus {
@@ -51,17 +66,18 @@ button:focus {
 
 button:hover,
 button:active {
-  background: #a80041;
-  border-color: #a80041;
+  background: #2f2f2f;
+  border-color: #262626;
 }
 
 .projects {
   margin: 1rem;
-  border: 1px solid #ff0062;
+  border: 1px solid #89bb86;
+  border-radius: 8px;
 }
 
 .projects header {
-  background: #ff0062;
+  background: #89bb86;
   height: 3.5rem;
   display: flex;
   justify-content: center;
@@ -69,11 +85,11 @@ button:active {
 }
 
 #finished-projects {
-  border-color: #0044ff;
+  border-color:  #8a53bb;
 }
 
 #finished-projects header {
-  background: #0044ff;
+  background: #8a53bb;
 }
 
 .projects h2 {
@@ -95,12 +111,12 @@ button:active {
 }
 
 .projects li h2 {
-  color: #ff0062;
+  color: #89bb86;
   margin: 0.5rem 0;
 }
 
 #finished-projects li h2 {
-  color: #0044ff;
+  color: #8a53bb;
 }
 
 .projects li h3 {
@@ -113,16 +129,18 @@ button:active {
 }
 
 .droppable {
-  background: #ffe3ee;
+  background: #eeffe3;
 }
 
 #finished-projects .droppable {
-  background: #d6e1ff;
+  background: #edd6ff;
 }
 
 #user-input {
   margin: 1rem;
-  padding: 1rem;
-  border: 1px solid #ff0062;
-  background: #f7f7f7;
+  box-shadow: 0 30px 60px rgba(0,0,0,.12);
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  background: #fff;
+  padding: 2rem;
 }
