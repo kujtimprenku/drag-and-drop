@@ -16,3 +16,8 @@ yarn start
 ```bash
 tsc -w
 ```
+
+### Lint TS files
+```bash
+yarn lint
+```
