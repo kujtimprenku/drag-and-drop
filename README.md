@@ -1,33 +1,24 @@
-# Simple Drag & Drop Typescript Project
+## Simple Drag & Drop Typescript Project
 
 
-### Install Dependencies
+### Installation & Usage
 
 ```bash
+# Install Dependencies
 yarn install
-```
-### Start App in Dev Mode
 
-```bash
+# Start App in Development Mode
 yarn dev
-```
 
-### Build for Production
-```bash
+# Build App in Production Mode
 yarn build
-```
 
-### Preview Production Mode
-```bash
+# Preview Production Mode
 yarn preview
-```
 
-### Lint TS files
-```bash
+# Lint TS files
 yarn lint
-```
 
-### Deploy Project to GH-Pages
-```bash
+# Deploy Project to GH-Pages
 yarn deploy
 ```
