@@ -1,11 +1,11 @@
 // ProjectList class
-import type { DragTarget } from "../models/drag-drop";
 import { Component } from "./base-component";
 import { Autobind } from "../decorators/autobind";
 import { ProjectItem } from "./project-item";
-import type { Project } from "../models/project";
 import { ProjectStatus } from "../models/project";
 import { projectState } from "../state/project-state";
+import type { DragTarget } from "../models/drag-drop";
+import type { Project } from "../models/project";
 
 export class ProjectList extends Component<HTMLDivElement, HTMLElement> implements DragTarget {
   assignedProjects: Array<Project>;
@@ -39,6 +39,8 @@ export class ProjectList extends Component<HTMLDivElement, HTMLElement> implemen
       prjId,
       this.type === "active" ? ProjectStatus.ACTIVE : ProjectStatus.FINISHED
     );
+    const listEl = this.element.querySelector("ul")!;
+    listEl.classList.remove("droppable");
   }
 
   configure() {
