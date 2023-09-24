@@ -7,6 +7,7 @@
     "node": true,
     "jest": true
   },
+  "ignorePatterns": ["vite.config.ts"],
   "plugins": ["@typescript-eslint", "prettier"],
   "overrides": [
     {
