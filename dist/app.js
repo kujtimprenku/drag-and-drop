@@ -5,12 +5,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var ProjectStatus;
+(function (ProjectStatus) {
+    ProjectStatus[ProjectStatus["ACTIVE"] = 0] = "ACTIVE";
+    ProjectStatus[ProjectStatus["FINISHED"] = 1] = "FINISHED";
+})(ProjectStatus || (ProjectStatus = {}));
 class State {
     constructor() {
         this.listeners = [];
     }
     addListener(listenerFn) {
         this.listeners.push(listenerFn);
+    }
+}
+class Project {
+    constructor(id, title, description, people, status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.people = people;
+        this.status = status;
     }
 }
 class ProjectState extends State {
@@ -31,7 +45,7 @@ class ProjectState extends State {
         this.updateListeners();
     }
     moveProject(projectId, newStatus) {
-        const project = this.projects.find(p => p.id === projectId);
+        const project = this.projects.find((p) => p.id === projectId);
         if (project && project.status !== newStatus) {
             project.status = newStatus;
             this.updateListeners();
@@ -71,23 +85,9 @@ function Autobind(_, _2, descriptor) {
         get() {
             const boundFn = originalMethod.bind(this);
             return boundFn;
-        }
+        },
     };
     return adjustedDescriptor;
-}
-var ProjectStatus;
-(function (ProjectStatus) {
-    ProjectStatus[ProjectStatus["ACTIVE"] = 0] = "ACTIVE";
-    ProjectStatus[ProjectStatus["FINISHED"] = 1] = "FINISHED";
-})(ProjectStatus || (ProjectStatus = {}));
-class Project {
-    constructor(id, title, description, people, status) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.people = people;
-        this.status = status;
-    }
 }
 class Component {
     constructor(templateId, hostElementId, insertAtStart, newElementId) {
@@ -123,7 +123,7 @@ class ProjectItem extends Component {
         event.dataTransfer.setData("text/plain", this.project.id);
         event.dataTransfer.effectAllowed = "move";
     }
-    dragEndHandler(_) {
+    dragEndHandler() {
         console.log("DragEnd");
     }
     configure() {
@@ -154,7 +154,7 @@ class ProjectList extends Component {
             listEl.classList.add("droppable");
         }
     }
-    dragLeaveHandler(_) {
+    dragLeaveHandler() {
         const listEl = this.element.querySelector("ul");
         listEl.classList.remove("droppable");
     }
@@ -167,7 +167,7 @@ class ProjectList extends Component {
         this.element.addEventListener("dragleave", this.dragLeaveHandler);
         this.element.addEventListener("drop", this.dropHandler);
         projectState.addListener((projects) => {
-            const relevantProjects = projects.filter(p => {
+            const relevantProjects = projects.filter((p) => {
                 if (this.type === "active") {
                     return p.status === ProjectStatus.ACTIVE;
                 }
@@ -210,26 +210,25 @@ class ProjectInput extends Component {
     configure() {
         this.element.addEventListener("submit", this.submitHandler);
     }
-    renderContent() {
-    }
+    renderContent() { }
     gatherUserInput() {
         const enteredTitle = this.titleInputElement.value;
         const enteredDescription = this.descriptionInputElement.value;
         const enteredPeople = this.peopleInputElement.value;
         const titleValidatable = {
             value: enteredTitle,
-            required: true
+            required: true,
         };
         const descriptionValidatable = {
             value: enteredDescription,
             required: true,
-            minLength: 5
+            minLength: 5,
         };
         const peopleValidatable = {
             value: +enteredPeople,
             required: true,
             min: 1,
-            max: 5
+            max: 5,
         };
         if (!validate(titleValidatable) ||
             !validate(descriptionValidatable) ||
@@ -259,7 +258,7 @@ class ProjectInput extends Component {
 __decorate([
     Autobind
 ], ProjectInput.prototype, "submitHandler", null);
-const projectInput = new ProjectInput();
-const activeProjectList = new ProjectList("active");
-const finishedProjectList = new ProjectList("finished");
+new ProjectInput();
+new ProjectList("active");
+new ProjectList("finished");
 //# sourceMappingURL=app.js.map
