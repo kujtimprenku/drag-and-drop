@@ -11,3 +11,8 @@ yarn install
 ```bash
 yarn start
 ```
+
+### Compile TS files in watch mode
+```bash
+tsc -w
+```
