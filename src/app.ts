@@ -100,12 +100,12 @@ class Project {
 // ProjectList class
 class ProjectList {
     templateElement: HTMLTemplateElement;
-    hostElement: HTMLDialogElement;
+    hostElement: HTMLDivElement;
     element: HTMLElement;
     assignedProjects: Array<Project>;
     constructor(private type: "active" | "finished") {
         this.templateElement = document.getElementById("project-list")! as HTMLTemplateElement;
-        this.hostElement = document.getElementById("app")! as HTMLDialogElement;
+        this.hostElement = document.getElementById("app")! as HTMLDivElement;
         this.assignedProjects = [];
 
         const importedNode = document.importNode(this.templateElement.content, true);
@@ -150,7 +150,7 @@ class ProjectList {
 // ProjectInput class
 class ProjectInput {
     templateElement: HTMLTemplateElement;
-    hostElement: HTMLDialogElement;
+    hostElement: HTMLDivElement;
     element: HTMLFormElement;
     titleInputElement: HTMLInputElement;
     descriptionInputElement: HTMLInputElement;
@@ -158,7 +158,7 @@ class ProjectInput {
 
     constructor() {
         this.templateElement = document.getElementById("project-input")! as HTMLTemplateElement;
-        this.hostElement = document.getElementById("app")! as HTMLDialogElement;
+        this.hostElement = document.getElementById("app")! as HTMLDivElement;
 
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild as HTMLFormElement;
