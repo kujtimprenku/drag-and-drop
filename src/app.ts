@@ -1,5 +1,6 @@
 type Listener<T> = (items: Array<T>) => void;
 
+// State Management class
 class State<T> {
     protected listeners: Array<Listener<T>> = [];
 
@@ -8,7 +9,7 @@ class State<T> {
     }
 }
 
-// Project State Management class
+// ProjectState Management class
 class ProjectState extends State<Project>{
     private projects: Array<Project> = [];
     private static instance: ProjectState;
@@ -127,6 +128,27 @@ abstract class Component<T extends HTMLElement, U extends HTMLElement> {
     abstract renderContent(): void;
 }
 
+// ProjectItem class
+class ProjectItem extends Component<HTMLUListElement, HTMLLIElement>{
+    private project: Project;
+    constructor(hostId: string, project: Project) {
+        super("single-project", hostId, false, project.id);
+        this.project = project;
+
+        this.configure();
+        this.renderContent();
+    }
+
+    configure() {
+        this.element.querySelector("h2")!.innerText = this.project.title;
+        this.element.querySelector("h3")!.innerText = this.project.people.toString();
+        this.element.querySelector("p")!.innerText = this.project.description;
+    }
+
+    renderContent() {
+    }
+}
+
 // ProjectList class
 class ProjectList extends Component<HTMLDivElement, HTMLElement>{
     assignedProjects: Array<Project>;
@@ -161,9 +183,7 @@ class ProjectList extends Component<HTMLDivElement, HTMLElement>{
         const listEl = document.getElementById( `${this.type}-projects-list`)! as HTMLUListElement;
         listEl.innerHTML = "";
         for (const prjItem of this.assignedProjects) {
-            const listItem = document.createElement("li");
-            listItem.textContent = prjItem.title;
-            listEl.appendChild(listItem);
+            new ProjectItem(this.element.querySelector("ul")!.id, prjItem)
         }
     }
 }
