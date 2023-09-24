@@ -1,4 +1,4 @@
-## Simple Drag & Drop Typescript Project
+# Simple Drag & Drop Typescript Project
 
 
 ### Install Dependencies
@@ -25,4 +25,9 @@ yarn preview
 ### Lint TS files
 ```bash
 yarn lint
+```
+
+### Deploy Project to GH-Pages
+```bash
+yarn deploy
 ```
